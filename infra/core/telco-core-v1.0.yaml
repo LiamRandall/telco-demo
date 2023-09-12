@@ -19,13 +19,13 @@ spec:
                   cosmonic_managed: 'true'
           type: spreadscaler
         - properties:
-            target: httpserver
+            target: httpserveraa
           type: linkdef
         - properties:
-            target: cosmonic-kv
+            target: cosmonic-kvbb
           type: linkdef
       type: actor
-    - name: httpserver
+    - name: httpserveraa
       properties:
         contract: wasmcloud:httpserver
         image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4
@@ -38,7 +38,7 @@ spec:
                   cosmonic_managed: 'true'
           type: spreadscaler
       type: capability
-    - name: cosmonic-kv
+    - name: cosmonic-kvbb
       properties:
         contract: wasmcloud:keyvalue
         image: cosmonic.azurecr.io/builtin_keyvalue:0.2.4

@@ -19,10 +19,10 @@ spec:
                   cosmonic_managed: 'true'
           type: spreadscaler
         - properties:
-            target: httpserver-edge
+            target: httpserver-ee
           type: linkdef
       type: actor
-    - name: httpserver-edge
+    - name: httpserver-ee
       properties:
         contract: wasmcloud:httpserver
         image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4

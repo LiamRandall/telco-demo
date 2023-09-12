@@ -19,10 +19,10 @@ spec:
                   type: user
           type: daemonscaler
         - properties:
-            target: httpserver-user
+            target: httpserver-nn
           type: linkdef
       type: actor
-    - name: httpserver-user
+    - name: httpserver-nn
       properties:
         contract: wasmcloud:httpserver
         image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4

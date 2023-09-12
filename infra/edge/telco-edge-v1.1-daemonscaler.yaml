@@ -19,10 +19,10 @@ spec:
                   type: edge
           type: daemonscaler
         - properties:
-            target: httpserver-edge
+            target: httpserver-ff
           type: linkdef
       type: actor
-    - name: httpserver-edge
+    - name: httpserver-ff
       properties:
         contract: wasmcloud:httpserver
         image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4

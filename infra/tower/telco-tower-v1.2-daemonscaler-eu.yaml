@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     description: Telco Tower
-    version: v0.1.2-daemonscaler-eu
+    version: v0.1.2-daemonscaler-eue
   name: tower
 spec:
   components:
@@ -16,11 +16,11 @@ spec:
             spread:
               - name: alltowers_de
                 requirements:
-                  type: tower
                   country: de
+                  type: tower
           type: daemonscaler
         - properties:
-            target: httpserver-tower
+            target: httpserver-ii
           type: linkdef
       type: actor
     - name: tower-fr
@@ -32,14 +32,27 @@ spec:
             spread:
               - name: alltowers_fr
                 requirements:
-                  type: tower
                   country: fr
+                  type: tower
           type: daemonscaler
         - properties:
-            target: httpserver-tower
+            target: httpserver-jj
           type: linkdef
       type: actor
-    - name: httpserver-tower
+    - name: httpserver-ii
+      properties:
+        contract: wasmcloud:httpserver
+        image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: oncosmonic
+                requirements:
+                  cosmonic_managed: 'true'
+          type: spreadscaler
+      type: capability
+    - name: httpserver-jj
       properties:
         contract: wasmcloud:httpserver
         image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4

@@ -2,30 +2,46 @@ apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
   annotations:
-    description: Telco core Daemonscaler
-    version: v0.1.1-daemonscaler
+    description: Telco Core
+    version: v0.1.0
   name: core
 spec:
   components:
-    - name: core
+    - name: telco_core
       properties:
         image: ghcr.io/liamrandall/telco_core:0.1.0
       traits:
         - properties:
             replicas: 1
             spread:
-              - name: allcore
+              - name: core
                 requirements:
-                  type: core
+                  type: 'core'
           type: daemonscaler
         - properties:
-            target: httpserver-core
+            target: httpservercc
+          type: linkdef
+        - properties:
+            target: cosmonic-kvdd
           type: linkdef
       type: actor
-    - name: httpserver-core
+    - name: httpservercc
       properties:
         contract: wasmcloud:httpserver
         image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: oncosmonic
+                requirements:
+                  cosmonic_managed: 'true'
+          type: spreadscaler
+      type: capability
+    - name: cosmonic-kvdd
+      properties:
+        contract: wasmcloud:keyvalue
+        image: cosmonic.azurecr.io/builtin_keyvalue:0.2.4
       traits:
         - properties:
             replicas: 1
