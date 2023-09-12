@@ -1,0 +1,7 @@
+name = "tower-de"
+language = "rust"
+type = "actor"
+version = "0.1.1"
+
+[actor]
+claims = ["wasmcloud:httpserver"]

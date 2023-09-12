@@ -1,0 +1,54 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  annotations:
+    description: Telco Tower
+    version: v0.1.3-daemonscaler-eu-up
+  name: tower
+spec:
+  components:
+    - name: tower-de
+      properties:
+        image: ghcr.io/liamrandall/telco_tower_de:0.1.1
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: alltowers_de
+                requirements:
+                  type: tower
+                  country: de
+          type: daemonscaler
+        - properties:
+            target: httpserver-tower
+          type: linkdef
+      type: actor
+    - name: tower-fr
+      properties:
+        image: ghcr.io/liamrandall/telco_tower_fr:0.1.1
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: alltowers_fr
+                requirements:
+                  type: tower
+                  country: fr
+          type: daemonscaler
+        - properties:
+            target: httpserver-tower
+          type: linkdef
+      type: actor
+    - name: httpserver-tower
+      properties:
+        contract: wasmcloud:httpserver
+        image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: oncosmonic
+                requirements:
+                  cosmonic_managed: 'true'
+          type: spreadscaler
+      type: capability

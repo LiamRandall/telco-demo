@@ -1,0 +1,53 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  annotations:
+    description: Telco Core
+    version: v0.1.0
+  name: core
+spec:
+  components:
+    - name: telco_core
+      properties:
+        image: ghcr.io/liamrandall/telco_core:0.1.0
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: oncosmonic
+                requirements:
+                  cosmonic_managed: 'true'
+          type: spreadscaler
+        - properties:
+            target: httpserver
+          type: linkdef
+        - properties:
+            target: cosmonic-kv
+          type: linkdef
+      type: actor
+    - name: httpserver
+      properties:
+        contract: wasmcloud:httpserver
+        image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: oncosmonic
+                requirements:
+                  cosmonic_managed: 'true'
+          type: spreadscaler
+      type: capability
+    - name: cosmonic-kv
+      properties:
+        contract: wasmcloud:keyvalue
+        image: cosmonic.azurecr.io/builtin_keyvalue:0.2.4
+      traits:
+        - properties:
+            replicas: 1
+            spread:
+              - name: oncosmonic
+                requirements:
+                  cosmonic_managed: 'true'
+          type: spreadscaler
+      type: capability
