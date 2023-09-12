@@ -1,6 +1,8 @@
 # Telco Scaling Demo
 This project is a quick demonstration of WADM and the power of daemonscalers to manage disparate infrastrucutre.
 
+First deploy all of the telco components only on Cosmonic.
+
 | Deployment  | Link | Topology |
 | ------------- | ------------- | ------------- |
 | Telco Core on Cosmonic  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/core/telco-core-v1.0.yaml) | Telco Core with built in Cosmonic KV.  |
@@ -8,12 +10,16 @@ This project is a quick demonstration of WADM and the power of daemonscalers to 
 | Telco Edge on Cosmonic  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/edge/telco-edge-v1.0.yaml) | Telco Core with built in HTTP.  |
 | Telco User on Cosmonic  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/user/telco-user-v1.0.yaml) | Telco Core with built in HTTP.  |
 
+Then schedule all of the components to run on their tagged infrastructures - `core`, `tower`, `edge`, and `user` via a daemonscaler.
+
 | Deployment  | Link | Topology |
 | ------------- | ------------- | ------------- |
 | Telco Core Daemonset on Labels  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/core/telco-core-v1.1-daemonscaler.yaml) | Telco Core with built in Cosmonic KV.  |
 | Telco Tower Daemonset on Labels  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/tower/telco-tower-v1.1-daemonscaler.yaml) | Telco Core with built in HTTP.  |
 | Telco Edge Daemonset on Labels  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/edge/telco-edge-v1.1-daemonscaler.yaml) | Telco Core with built in HTTP.  |
 | Telco User Daemonset on Labels  | [<img src="https://cosmonic.com/badge/deploy.svg" alt="Deploy on Cosmonic" width="400">](https://new.cosmonic.app/?yaml=https://raw.githubusercontent.com/LiamRandall/telco-demo/main/infra/user/telco-user-v1.1-daemonscaler.yaml) | Telco Core with built in HTTP.  |
+
+Then schedule all of the components to run on their tagged infrastructures - `core`, `tower`, `edge`, and `user` via a daemonscaler and run different components on towers labeled as `de` and `fr`.  Then upgrade those two nodes so they answer hello world in german and french.
 
 | Deployment  | Link | Topology |
 | ------------- | ------------- | ------------- |
