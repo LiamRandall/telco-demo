@@ -25,7 +25,7 @@ spec:
     - name: httpserver-hh
       properties:
         contract: wasmcloud:httpserver
-        image: cosmonic.azurecr.io/httpserver_wormhole:0.5.4
+        image: cosmonic.azurecr.io/httpserver_wormhole:0.6.0
       traits:
         - properties:
             replicas: 1
